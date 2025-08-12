@@ -1,0 +1,32 @@
+{% extends 'dashboard.html' %}
+{% block content %}
+{% load static %}
+
+<div class="container" style="background: #f6f6f3; border-radius: 32px; max-width: 500px; margin: 100px auto 0 auto;">
+    {% if messages %}
+    <ul class="messages">
+      {% for message in messages %}
+      <li id="msg" class="alert {{ message.tags }}">{{ message }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+
+    <form method="POST" action="" class="shadow rounded-5" style="background: #f6f6f3; border-radius: 32px; padding: 32px 0 0 0;">
+        {% csrf_token %}
+        <center>
+            <strong>
+                <p class="mt-5" style="color: #198754; text-align: center;">Name</p>
+            </strong>
+            <p style="border:0; width: 250px; text-align: center; background: #fff; color: #222; border-radius: 0; border-bottom: 2px solid #e9ffb2; font-size: 1.1rem; margin-bottom: 16px; padding: 8px 0;" class="m-3 border-bottom border-secondary text-secondary">{{name}}</p>
+            <strong>
+                <p style="color:#198754; text-align: center;">Email</p>
+            </strong>
+            <p style="border:0; width: 250px; text-align: center; background: #fff; color: #222; border-radius: 0; border-bottom: 2px solid #e9ffb2; font-size: 1.1rem; margin-bottom: 16px; padding: 8px 0;" class="m-3 border-bottom border-secondary text-secondary">{{email}}</p>
+            <br><br>
+            <a href="{% url 'logout' %}" class="bg-light text-success border-0" style="font-weight: bolder; display: inline-block; margin-bottom: 24px;">
+                <p class="mb-4 pb-0" style="text-align: center;">Logout</p>
+            </a>
+        </center>
+    </form>
+</div>
+{% endblock %}
