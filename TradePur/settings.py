@@ -20,7 +20,6 @@ tempp_dir = os.path.join(BASE_DIR, 'static')
 
 SECRET_KEY = os.environ.get("SECRET_KEY", "django-insecure-d)cfhul3gp#qjpfe)^vidsy&dw7$za@z9l85dft&(%ka(w#tza")
 DEBUG = os.environ.get("DEBUG", "True") == "True"
-ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "localhost 127.0.0.1 .onrender.com").split()
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
