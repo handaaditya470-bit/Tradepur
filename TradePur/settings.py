@@ -45,6 +45,7 @@ EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', 'ndhq iwxw fwqc ydom
 # DEBUG = True
 
 ALLOWED_HOSTS = [
+    "tradepur-qwdg.onrender.com",  # <-- Add this line
     "tradepur.onrender.com",
     "localhost",
     "127.0.0.1",
