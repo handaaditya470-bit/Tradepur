@@ -45,7 +45,11 @@ EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', 'ndhq iwxw fwqc ydom
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = True
 
-# ALLOWED_HOSTS = [whitenoise]
+ALLOWED_HOSTS = [
+    "tradepur.onrender.com",
+    "localhost",
+    "127.0.0.1",
+]
 
 
 # Application definition
