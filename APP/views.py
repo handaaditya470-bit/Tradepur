@@ -78,7 +78,6 @@ def index(request):
                         print(f"Email sending failed: {e}")
                         messages.error(request, "Could not send OTP email. Please try again later.")
                         return render(request, "index.html")
-
                     request.session["u_name"] = name
                     request.session["u_mail"] = email
                     request.session["u_password"] = password
