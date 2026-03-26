@@ -1,7 +1,11 @@
 from pathlib import Path
 import os
 from django.contrib.messages import constants as messages
+# settings.py
 
+CSRF_TRUSTED_ORIGINS = [
+    "https://tradepur.up.railway.app",
+]
 # Email config - reads from Render environment variables
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
@@ -23,9 +27,9 @@ tempp_dir = os.path.join(BASE_DIR, 'static')
 SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-d)cfhul3gp#qjpfe)^vidsy&dw7$za@z9l85dft&(%ka(w#tza')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['tradepur.up.railway.app', '127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['tradepur.up.railway.app']
 
 
 # Application definition
