@@ -25,7 +25,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-d)cfhul3gp#qjpfe)^vid
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['tradepur-twrp.onrender.com']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
