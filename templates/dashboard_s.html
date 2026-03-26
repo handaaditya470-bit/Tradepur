@@ -1,0 +1,298 @@
+{% extends 'dashboard.html' %}
+{% block content %}
+{% load static %}
+
+<style>
+    .stock-card {
+        background: #fff;
+        border-radius: 24px;
+        box-shadow: 0 4px 24px 0 rgba(34, 34, 34, 0.07), 0 1.5px 6px 0 rgba(127, 251, 155, 0.08);
+        margin-bottom: 40px;
+        margin-right: 0;
+        margin-left: 0;
+        padding: 18px 0 10px 0;
+        transition: box-shadow 0.2s, transform 0.2s;
+        border: none;
+        min-height: 140px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        font-family: 'Inter', Arial, sans-serif;
+    }
+    .stock-card:hover {
+        box-shadow: 0 8px 32px 0 rgba(34, 34, 34, 0.13), 0 3px 12px 0 rgba(127, 251, 155, 0.13);
+        transform: translateY(-6px) scale(1.03);
+    }
+    .stock-symbol {
+        font-size: 2.2rem;
+        font-weight: 900;
+        color: #222; /* index.html heading color */
+        margin-bottom: 0.2rem;
+        letter-spacing: 2px;
+        font-family: 'Inter', Arial, sans-serif;
+    }
+    .stock-name {
+        color: #7ffb9b; /* index.html accent color */
+        font-weight: 700;
+        font-size: 1.1rem;
+        margin-bottom: 0;
+        letter-spacing: 1px;
+        font-family: 'Inter', Arial, sans-serif;
+    }
+    .stock-link {
+        text-decoration: none;
+        width: 100%;
+        display: block;
+    }
+    .stock-card .btn {
+        background: transparent;
+        border: none;
+        width: 100%;
+        padding: 0;
+        box-shadow: none;
+    }
+    @media (max-width: 1200px) {
+        .stock-card {
+            min-height: 120px;
+        }
+    }
+    @media (max-width: 992px) {
+        .stock-card {
+            min-height: 100px;
+        }
+    }
+    @media (max-width: 768px) {
+        .stock-card {
+            min-height: 80px;
+            padding: 12px 0 8px 0;
+        }
+    }
+</style>
+
+<div class="container py-5">
+    <div class="row justify-content-center g-4">
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+            <form method="POST" action="" class="stock-card">
+                {% csrf_token %}
+                <a href="{% url 'apple' %}" class="stock-link">
+                    <button type="button" class="btn">
+                        <div class="stock-symbol">AAPL</div>
+                        <div class="stock-name">Apple Inc</div>
+                    </button>
+                </a>
+            </form>
+        </div>
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+            <form method="POST" action="" class="stock-card">
+                {% csrf_token %}
+                <a href="{% url 'tesla' %}" class="stock-link">
+                    <button type="button" class="btn">
+                        <div class="stock-symbol">TSLA</div>
+                        <div class="stock-name">Tesla Inc</div>
+                    </button>
+                </a>
+            </form>
+        </div>
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+            <form method="POST" action="" class="stock-card">
+                {% csrf_token %}
+                <a href="{% url 'microsoft' %}" class="stock-link">
+                    <button type="button" class="btn">
+                        <div class="stock-symbol">MSFT</div>
+                        <div class="stock-name">Microsoft Corp.</div>
+                    </button>
+                </a>
+            </form>
+        </div>
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+            <form method="POST" action="" class="stock-card">
+                {% csrf_token %}
+                <a href="{% url 'visa' %}" class="stock-link">
+                    <button type="button" class="btn">
+                        <div class="stock-symbol">V</div>
+                        <div class="stock-name">Visa Inc</div>
+                    </button>
+                </a>
+            </form>
+        </div>
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+            <form method="POST" action="" class="stock-card">
+                {% csrf_token %}
+                <a href="{% url 'unitedhealth' %}" class="stock-link">
+                    <button type="button" class="btn">
+                        <div class="stock-symbol">UNH</div>
+                        <div class="stock-name">UnitedHealth</div>
+                    </button>
+                </a>
+            </form>
+        </div>
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+            <form method="POST" action="" class="stock-card">
+                {% csrf_token %}
+                <a href="{% url 'cocacola' %}" class="stock-link">
+                    <button type="button" class="btn">
+                        <div class="stock-symbol">KO</div>
+                        <div class="stock-name">Coca-Cola Co.</div>
+                    </button>
+                </a>
+            </form>
+        </div>
+        {% comment %} <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+            <form method="POST" action="" class="stock-card">
+                {% csrf_token %}
+                <a href="{% url 'pg' %}" class="stock-link">
+                    <button type="button" class="btn">
+                        <div class="stock-symbol">PG</div>
+                        <div class="stock-name">Procter & Gamble</div>
+                    </button>
+                </a>
+            </form>
+        </div> {% endcomment %}
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+            <form method="POST" action="" class="stock-card">
+                {% csrf_token %}
+                <a href="{% url 'chevron' %}" class="stock-link">
+                    <button type="button" class="btn">
+                        <div class="stock-symbol">CVX</div>
+                        <div class="stock-name">Chevron Corp.</div>
+                    </button>
+                </a>
+            </form>
+        </div>
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+            <form method="POST" action="" class="stock-card">
+                {% csrf_token %}
+                <a href="{% url 'cisco' %}" class="stock-link">
+                    <button type="button" class="btn">
+                        <div class="stock-symbol">CSCO</div>
+                        <div class="stock-name">Cisco Systems</div>
+                    </button>
+                </a>
+            </form>
+        </div>
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+            <form method="POST" action="" class="stock-card">
+                {% csrf_token %}
+                <a href="{% url 'intel' %}" class="stock-link">
+                    <button type="button" class="btn">
+                        <div class="stock-symbol">INTC</div>
+                        <div class="stock-name">Intel Corp.</div>
+                    </button>
+                </a>
+            </form>
+        </div>
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+            <form method="POST" action="" class="stock-card">
+                {% csrf_token %}
+                <a href="{% url 'disney' %}" class="stock-link">
+                    <button type="button" class="btn">
+                        <div class="stock-symbol">DIS</div>
+                        <div class="stock-name">Disney Co.</div>
+                    </button>
+                </a>
+            </form>
+        </div>
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+            <form method="POST" action="" class="stock-card">
+                {% csrf_token %}
+                <a href="{% url 'jpmorgan' %}" class="stock-link">
+                    <button type="button" class="btn">
+                        <div class="stock-symbol">JPM</div>
+                        <div class="stock-name">JPMorgan Co.</div>
+                    </button>
+                </a>
+            </form>
+        </div>
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+            <form method="POST" action="" class="stock-card">
+                {% csrf_token %}
+                <a href="{% url 'mastercard' %}" class="stock-link">
+                    <button type="button" class="btn">
+                        <div class="stock-symbol">MA</div>
+                        <div class="stock-name">Mastercard Inc.</div>
+                    </button>
+                </a>
+            </form>
+        </div>
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+            <form method="POST" action="" class="stock-card">
+                {% csrf_token %}
+                <a href="{% url 'adeia' %}" class="stock-link">
+                    <button type="button" class="btn">
+                        <div class="stock-symbol">ADEA</div>
+                        <div class="stock-name">Adeia Inc.</div>
+                    </button>
+                </a>
+            </form>
+        </div>
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+            <form method="POST" action="" class="stock-card">
+                {% csrf_token %}
+                <a href="{% url 'albertsons' %}" class="stock-link">
+                    <button type="button" class="btn">
+                        <div class="stock-symbol">ACI</div>
+                        <div class="stock-name">Albertsons Inc.</div>
+                    </button>
+                </a>
+            </form>
+        </div>
+        {% comment %} <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+            <form method="POST" action="" class="stock-card">
+                {% csrf_token %}
+                <a href="{% url 'aceglobal' %}" class="stock-link">
+                    <button type="button" class="btn">
+                        <div class="stock-symbol">ACBA</div>
+                        <div class="stock-name">Ace Global Ltd.</div>
+                    </button>
+                </a>
+            </form>
+        </div> {% endcomment %}
+        {% comment %} <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+            <form method="POST" action="" class="stock-card">
+                {% csrf_token %}
+                <a href="{% url 'd3system' %}" class="stock-link">
+                    <button type="button" class="btn">
+                        <div class="stock-symbol">DDD</div>
+                        <div class="stock-name">3D Systems Co.</div>
+                    </button>
+                </a>
+            </form>
+        </div> {% endcomment %}
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+            <form method="POST" action="" class="stock-card">
+                {% csrf_token %}
+                <a href="{% url 'google' %}" class="stock-link">
+                    <button type="button" class="btn">
+                        <div class="stock-symbol">GOOGL</div>
+                        <div class="stock-name">Google</div>
+                    </button>
+                </a>
+            </form>
+        </div>
+        {% comment %} <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+            <form method="POST" action="" class="stock-card">
+                {% csrf_token %}
+                <a href="{% url 'a10' %}" class="stock-link">
+                    <button type="button" class="btn">
+                        <div class="stock-symbol">ATEN</div>
+                        <div class="stock-name">ATEN</div>
+                    </button>
+                </a>
+            </form>
+        </div> {% endcomment %}
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+            <form method="POST" action="" class="stock-card">
+                {% csrf_token %}
+                <a href="{% url 'amazon' %}" class="stock-link">
+                    <button type="button" class="btn">
+                        <div class="stock-symbol">AMZN</div>
+                        <div class="stock-name">Amazon</div>
+                    </button>
+                </a>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
