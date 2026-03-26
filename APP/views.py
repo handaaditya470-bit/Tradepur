@@ -5,6 +5,17 @@ from django.contrib import messages
 from django.core.mail import send_mail
 import re
 from random import randint
+from django.views.decorators.csrf import csrf_exempt
+from django.http import JsonResponse  # make sure this is imported
+
+# CSRF exempt for registration POST
+@csrf_exempt
+def register(request):
+    if request.method == "POST":
+        username = request.POST.get("username")
+        password = request.POST.get("password")
+        # logic to create user
+        return JsonResponse({"status": "success"})
 
 g_otp = str(randint(100000, 999999))
 
