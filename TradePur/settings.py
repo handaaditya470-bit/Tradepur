@@ -35,9 +35,9 @@ tempp_dir=os.path.join(BASE_DIR,'static')
 SECRET_KEY = "django-insecure-d)cfhul3gp#qjpfe)^vidsy&dw7$za@z9l85dft&(%ka(w#tza"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['tradepur-twrp.onrender.com']
 
 
 # Application definition
