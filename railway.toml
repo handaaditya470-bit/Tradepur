@@ -1,6 +1,6 @@
-[deploy]
-startCommand = "gunicorn TradePur.wsgi --bind 0.0.0.0:$PORT"
-buildCommand = "pip install -r requirements.txt && python manage.py migrate && python manage.py collectstatic --noinput"
-
 [build]
 builder = "nixpacks"
+buildCommand = "pip install -r requirements.txt && python manage.py migrate && python manage.py collectstatic --noinput"
+
+[deploy]
+startCommand = "gunicorn TradePur.wsgi --bind 0.0.0.0:$PORT"

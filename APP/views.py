@@ -2,22 +2,33 @@ from django.shortcuts import render, redirect
 from APP.models import review, registr
 from django.conf import settings
 from django.contrib import messages
-from django.core.mail import send_mail
 import re
+import os
+import resend
 from random import randint
 from django.views.decorators.csrf import csrf_exempt
-from django.http import JsonResponse  # make sure this is imported
+from django.http import JsonResponse
 
-# CSRF exempt for registration POST
+resend.api_key = os.environ.get('RESEND_API_KEY', '')
+
 @csrf_exempt
 def register(request):
     if request.method == "POST":
         username = request.POST.get("username")
         password = request.POST.get("password")
-        # logic to create user
         return JsonResponse({"status": "success"})
 
 g_otp = str(randint(100000, 999999))
+
+
+def send_otp_email(to_email, otp):
+    params = {
+        "from": "TradePur <onboarding@resend.dev>",
+        "to": [to_email],
+        "subject": "OTP - TradePur",
+        "text": f"Your OTP for TradePur is -> {otp}",
+    }
+    resend.Emails.send(params)
 
 
 def otp_verify(request):
@@ -79,12 +90,8 @@ def index(request):
                     return render(request, "index.html", {"pin_length": 11})
 
                 if password == cpassword:
-                    subject = "OTP"
-                    message = "Your OTP for TradePur is -> " + g_otp
-                    email_from = settings.EMAIL_HOST_USER
-                    recipient_list = [email]
                     try:
-                        send_mail(subject, message, email_from, recipient_list)
+                        send_otp_email(email, g_otp)
                     except Exception as e:
                         print(f"Email sending failed: {e}")
                         messages.error(request, "Could not send OTP email. Please try again later.")
