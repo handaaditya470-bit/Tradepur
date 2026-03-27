@@ -3,13 +3,10 @@ from APP.models import review, registr
 from django.conf import settings
 from django.contrib import messages
 import re
-import os
-import resend
 from random import randint
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 
-resend.api_key = os.environ.get('RESEND_API_KEY', '')
 
 @csrf_exempt
 def register(request):
@@ -18,46 +15,9 @@ def register(request):
         password = request.POST.get("password")
         return JsonResponse({"status": "success"})
 
-g_otp = str(randint(100000, 999999))
-
-
-def send_otp_email(to_email, otp):
-    params = {
-        "from": "TradePur <onboarding@resend.dev>",
-        "to": [to_email],
-        "subject": "OTP - TradePur",
-        "text": f"Your OTP for TradePur is -> {otp}",
-    }
-    resend.Emails.send(params)
-
 
 def otp_verify(request):
-    if request.method == "POST":
-        en_otp = request.POST.get("otp")
-        if g_otp == en_otp:
-            if (
-                request.session.has_key("u_name")
-                and request.session.has_key("u_mail")
-                and request.session.has_key("u_password")
-            ):
-                x = registr()
-                x.name = request.session["u_name"]
-                x.email = request.session["u_mail"]
-                x.password = request.session["u_password"]
-                x.status = "activate"
-                x.pin = request.session["u_pin"]
-                x.save()
-                del request.session["u_name"]
-                del request.session["u_mail"]
-                del request.session["u_password"]
-                del request.session["u_pin"]
-                messages.success(request, "Successfully Registered. Please Login !!!")
-                return redirect("/login/")
-        else:
-            messages.error(request, "Invalid OTP !!!")
-            return render(request, "otp.html")
-    else:
-        return render(request, "otp.html")
+    return render(request, "otp.html")
 
 
 def index(request):
@@ -90,32 +50,28 @@ def index(request):
                     return render(request, "index.html", {"pin_length": 11})
 
                 if password == cpassword:
-                    try:
-                        send_otp_email(email, g_otp)
-                    except Exception as e:
-                        print(f"Email sending failed: {e}")
-                        messages.error(request, "Could not send OTP email. Please try again later.")
-                        return render(request, "index.html")
-                    request.session["u_name"] = name
-                    request.session["u_mail"] = email
-                    request.session["u_password"] = password
-                    request.session["u_pin"] = pin
-                    return redirect("/otp/")
+                    x = registr()
+                    x.name = name
+                    x.email = email
+                    x.password = password
+                    x.status = "activate"
+                    x.pin = pin
+                    x.save()
+                    messages.success(request, "Successfully Registered. Please Login !!!")
+                    return redirect("/login/")
                 else:
                     return render(request, "index.html", {"pass_invalid": 7})
 
         elif val == "log":
-            if request.method == "POST":
-                user = registr.objects.filter(
-                    email=request.POST.get("login_mail"),
-                    password=request.POST.get("login_password"),
-                )
-                a = len(user)
-                if a > 0:
-                    request.session['l_user'] = request.POST.get("login_mail")
-                    return redirect("/pin/")
-                else:
-                    return render(request, "index.html", {"invalid_user": 9})
+            user = registr.objects.filter(
+                email=request.POST.get("login_mail"),
+                password=request.POST.get("login_password"),
+            )
+            if len(user) > 0:
+                request.session['l_user'] = request.POST.get("login_mail")
+                return redirect("/pin/")
+            else:
+                return render(request, "index.html", {"invalid_user": 9})
     else:
         return render(request, "index.html")
 
@@ -133,8 +89,7 @@ def pin(request):
         user = registr.objects.filter(
             email=request.session["l_user"], pin=request.POST.get("pin")
         )
-        a = len(user)
-        if a > 0:
+        if len(user) > 0:
             return redirect("/dashboard_s/")
         else:
             messages.error(request, "Invalid Security PIN !!!")
@@ -154,8 +109,7 @@ def login_page(request):
             email=request.POST.get("login_email"),
             password=request.POST.get("login_pass"),
         )
-        a = len(user)
-        if a > 0:
+        if len(user) > 0:
             request.session["l_user"] = request.POST.get("login_email")
             return redirect("/pin/")
         else:
@@ -173,10 +127,7 @@ def user_profile(request):
     user = registr.objects.get(email=request.session['l_user'])
     u_name = user.name
     u_email = user.email
-    if request.method == 'POST':
-        return render(request, 'userprofile.html', {'name': u_name, 'email': u_email})
-    else:
-        return render(request, 'userprofile.html', {'name': u_name, 'email': u_email})
+    return render(request, 'userprofile.html', {'name': u_name, 'email': u_email})
 
 
 def tesla(request):
