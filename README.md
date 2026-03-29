@@ -4,7 +4,7 @@ TradePur is a **stock market analysis web application** that provides real-time 
 It allows users to analyze stocks using advanced charts and track market trends easily.
 
 🌐 **Live Website:**
-https://tradepur-qwdg.onrender.com/
+https://tradepur.up.railway.app/
 
 ---
 
